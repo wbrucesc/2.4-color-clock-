@@ -7,9 +7,21 @@
 
   var clock = document.getElementById('clock');
   var timer = document.getElementById('timer-bar');
+  var showHex = false;
   // clock.innerHTML = "test";
 
+  document.getElementById('clock').onmouseover = function() {
+    mouseOver()};
 
+  document.getElementById('clock').onmouseout = function() {mouseOut()};
+
+  function mouseOver(){
+    showHex = true;
+
+  }
+  function mouseOut(){
+    showHex = false;
+  }
 
 
   function zeroPad(char) {
@@ -27,19 +39,28 @@
     var currentSeconds = today.getSeconds();
     var progress = (currentSeconds / 60) * 100;
 
+    console.log(showHex);
+    if (showHex === false){
     clock.innerHTML =
     zeroPad(currentHours) + ":" + zeroPad(currentMinutes) + ":" + zeroPad(currentSeconds);
-    // console.log(genHex(currentHours, currentMinutes, currentSeconds));
+    console.log(genHex(currentHours, currentMinutes, currentSeconds));
+  } else {
+    clock.innerHTML =
+    genHex(currentHours, currentMinutes, currentSeconds);
+  }
 
-    document.body.style.backgroundColor = genHex(currentHours, currentMinutes, currentSeconds);
-    document.getElementById('timer-bar').style.width = progress + "%";
+
+    document.getElementById('timer-bar').style.width = progress + 'vw';
     console.log(progress);
-
-    setTimeout(showTime, 500);
-
+  document.body.style.backgroundColor = genHex(currentHours, currentMinutes, currentSeconds);
+    setTimeout(showTime, 300);
   }
   showTime();
 
+
+
+
+  // clock.addEventlistener('hover', );
 
 
 
